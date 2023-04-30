@@ -12,3 +12,15 @@ This repo example assumes that you have set 2 environment variables:
 2. DUCKDB_DB_PATH
 
 You can enter them in a text file called .env or issue EXPORT or SET commands.  NOTE: When using the .env file, it apparently does not work when you are using Windows OS.
+
+## dagster.yaml file
+From my experience, Alpha Vantage API is not very receptive to concurrent API calls.  The following is what I have in my dagster.yaml file to ensure you don't have run failures:
+```
+run_coordinator:
+  module: dagster.core.run_coordinator
+  class: QueuedRunCoordinator
+  config:
+    max_concurrent_runs: 1
+telemetry:
+  enabled: false
+```
