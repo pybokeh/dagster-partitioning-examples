@@ -4,3 +4,11 @@ To understand dagster's asset partitioning.  I still have a hard time understand
 Furthermore, I was using duckdb IO manager, but I soon learned dagster's documentation for duckdb integration isn't as complete as their Snowflake documenation.  It was not until I looked at their Snowflake's [documenation](https://docs.dagster.io/integrations/snowflake/reference#storing-partitioned-assets) did I learn that I need to add the metadata= parameter to add the partition_expr key and it's value.
 
 After figuring out dagster's way of partitioning and also what partitioning does in general, I come to realize the benefits that it affords.  Previously, I would perform full table refreshes.  Essentially doing a "truncate then load" operation.  For large tables, this is quite an expensive operation.  In contrast, with partitioning, I am only loading new data into the table or limiting how much data I need to load.  This is performing what is known as incremental load.  With dagster's asset partitioning, it makes this process much easier and manageable.
+
+## Getting Started
+This repo example assumes that you have set 2 environment variables:
+
+1. API_KEY
+2. DUCKDB_DB_PATH
+
+You can enter them in a text file called .env or issue EXPORT or SET commands.  NOTE: When using the .env file, it apparently does not work when you are using Windows OS.
