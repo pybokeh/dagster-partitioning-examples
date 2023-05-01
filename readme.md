@@ -12,7 +12,7 @@ This repo example assumes that you have set 2 environment variables and the alph
 2. DUCKDB_DB_PATH
 3. alphavantage.duckdb which is available in this repo's `db` folder.  It has data thru 2023-04-21.
 
-You can enter them in a text file called .env or issue `export` or `set` commands.  NOTE: When using the .env file method, it apparently does not work when you are using Windows OS.
+You can enter the environment variables in a text file called .env per their recommended ["best practices"](https://docs.dagster.io/guides/dagster/using-environment-variables-and-secrets) or issue `export` or `set` commands.  NOTE: When using the .env file method, it apparently does not work correctly when you are using Windows OS.
 
 After you have executed runs to materialize the new partitions and then you want to start over or try again, you can reset the sample duckdb database to the original state, just issue the following command in duckdb CLI:
 
