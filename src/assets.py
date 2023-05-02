@@ -1,4 +1,4 @@
-from dagster import asset, DailyPartitionsDefinition, Definitions, MetadataValue, Output
+from dagster import asset, DailyPartitionsDefinition, Definitions, EnvVar, MetadataValue, Output
 from dagster_duckdb_pandas import duckdb_pandas_io_manager
 import os
 import pandas as pd
@@ -21,7 +21,7 @@ def daily_stock_prices(context) -> Output[pd.DataFrame]:
     print(f"partition_date_str: {partition_date_str}")
 
     symbol = 'VRSK'
-    api_key = os.getenv('API_KEY')
+    api_key = EnvVar("API_KEY")
     CSV_URL = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol={symbol}&interval=60min&slice=year1month1&apikey={api_key}'
 
     df = pd.read_csv(
@@ -55,7 +55,7 @@ defs = Definitions(
     resources={
         "io_manager": duckdb_pandas_io_manager.configured(
             {
-                "database": os.getenv('DUCKDB_DB_PATH')
+                "database": {"env": "DUCKDB_DB_PATH"),
             }
         )
     },
