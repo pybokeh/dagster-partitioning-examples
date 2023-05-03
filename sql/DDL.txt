@@ -1,0 +1,5 @@
+# Run the SQL script below to recreate the make_id_custom table inside your nhtsa.duckdb database
+# The necessary csv file (nhtsa_make_id.csv) to load is also provided
+CREATE SCHEMA public;
+CREATE TABLE public.make_id_custom(make_id INTEGER, make_name VARCHAR);
+COPY public.make_id_custom FROM 'nhtsa_make_id.csv' (AUTO_DETECT TRUE);
