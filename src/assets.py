@@ -55,7 +55,7 @@ defs = Definitions(
     resources={
         "io_manager": duckdb_pandas_io_manager.configured(
             {
-                "database": {"env": "DUCKDB_DB_PATH"),
+                "database": {"env": "DUCKDB_DB_PATH"},
             }
         )
     },
